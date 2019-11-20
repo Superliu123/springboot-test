@@ -1,0 +1,5 @@
+rootProject.name = 'springboot-test'
+include('test-common')
+include('test-domain')
+include('test-service')
+

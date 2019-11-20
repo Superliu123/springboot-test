@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+        REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    repositories {
+        maven {
+            url REPOSITORY_URL
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+allprojects {
+    repositories {
+        //内网地址
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'war'
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+
+    group 'com.springboot'
+    version '1.0-SNAPSHOT'
+    sourceCompatibility = 1.8
+
+    dependencies {
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile('org.projectlombok:lombok')
+    }
+}
