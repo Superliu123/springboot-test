@@ -1,20 +1,14 @@
-/**
- * All rights Reserved, Designed By Suixingpay.
- *
- * @author liu_chao[liu_chao2@suixingpay.com]
- * @date 2019-11-19 21:13
- * @version 01
- * @Copyright ©2019 Suixingpay. All rights reserved.
- * 注意：本内容仅限于随行付支付有限公司内部传阅，禁止外泄以及用于其他的商业用途。
- */
 package com.lc.controller;
 
+import com.lc.domain.User;
+import com.lc.service.TestService;
+import com.lc.utils.ResponseUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @description:
@@ -23,13 +17,20 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("test")
+@Slf4j
 public class TestController {
+    @Autowired
+    private TestService testService;
     @GetMapping("hello")
-    public Map<String, String> helloworld(){
-        Map<String, String> map = new HashMap<>();
-        map.put("code","200");
-        map.put("msg","HelloWorld");
-        return map;
+    public ResponseUtils helloworld(){
+        try {
+            User student = testService.getUser("1");
+            log.info("test出参student[{}]",student);
+            return ResponseUtils.ok(student, "查询成功");
+        } catch (Exception e) {
+            return ResponseUtils.warn("服务异常，请稍后再试");
+        }
+
     }
 
 }

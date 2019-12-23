@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lc.mapper.UserMapper">
+    <resultMap id="ResultMap"
+               type="com.lc.domain.User">
+        <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+        <result column="admin" property="admin" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="column">
+	    uuid, admin, password
+	</sql>
+
+    <sql id="table">
+        test.user
+    </sql>
+
+    <sql id="dynamicWhere">
+        <where>
+            <if test="admin != null and admin"> AND admin = #{admin}  </if>
+            <if test="password != 'null and password != '''"> AND password = #{password} </if>
+        </where>
+    </sql>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="ResultMap">
+        select <include refid="column"/>
+        from <include refid="table"/>
+        where uuid = #{uuid}
+    </select>
+
+</mapper>

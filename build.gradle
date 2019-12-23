@@ -2,6 +2,8 @@ buildscript {
     ext {
         springBootVersion = '1.5.9.RELEASE'
         REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
+        mysqlVersion='5.1.24'
+        oracleVersion="11.2.0.4"
     }
     repositories {
         maven {
@@ -28,7 +30,7 @@ subprojects {
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
 
-    group 'com.springboot'
+    group 'com.lc'
     version '1.0-SNAPSHOT'
     sourceCompatibility = 1.8
 
