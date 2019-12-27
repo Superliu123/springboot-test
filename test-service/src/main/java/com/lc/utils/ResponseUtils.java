@@ -24,19 +24,19 @@ public class ResponseUtils<T> {
         this.data = data;
     }
 
-    public static ResponseUtils ok(SystemMessageEnums systemMessageEnums) {
-        return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), systemMessageEnums.getMsg(), null);
-    }
-
     public static<T> ResponseUtils ok (T data) {
         return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), "", data);
     }
 
-    public static<T> ResponseUtils ok(T data, SystemMessageEnums systemMessageEnums){
-        return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), systemMessageEnums.getMsg(), data);
+    public static<T> ResponseUtils ok(T data, String msg){
+        return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), msg, data);
     }
 
-    public static ResponseUtils warn(SystemMessageEnums systemMessageEnums){
-        return new ResponseUtils<>(SystemMessageEnums.FAIL.getCode(), systemMessageEnums.getMsg(), null);
+    public static ResponseUtils warn(String msg){
+        return new ResponseUtils<>(SystemMessageEnums.FAIL.getCode(), msg, null);
+    }
+
+    public static ResponseUtils warn(SystemMessageEnums systemMessageEnums) {
+        return new ResponseUtils<>(systemMessageEnums.getCode(), systemMessageEnums.getMsg(), null);
     }
 }

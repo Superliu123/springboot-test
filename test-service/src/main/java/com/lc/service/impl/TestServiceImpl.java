@@ -1,8 +1,10 @@
 package com.lc.service.impl;
 
 import com.lc.domain.User;
+import com.lc.enums.SystemMessageEnums;
 import com.lc.mapper.UserMapper;
 import com.lc.service.TestService;
+import com.lc.utils.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,14 @@ public class TestServiceImpl implements TestService {
     private UserMapper userMapper;
 
     @Override
-    public User getUser(String uuid){
+    public ResponseUtils getUser(String uuid){
         log.info("测试test入参uuid[{}]", uuid);
-        return userMapper.findById(uuid);
+        User user = userMapper.findById(uuid);
+        log.info("test出参student[{}]",user);
+        if (user == null) {
+            return ResponseUtils.ok(new Object(), SystemMessageEnums.DATA_IS_NULL.getMsg());
+        } else {
+            return ResponseUtils.ok(user);
+        }
     }
 }

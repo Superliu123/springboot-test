@@ -31,14 +31,11 @@ public class TestController {
     @ApiOperation(value = "测试hello", notes = "测试hello")
     public ResponseUtils helloWorld(String uuid){
         try {
-            User student = testService.getUser(uuid);
-            log.info("test出参student[{}]",student);
-            return ResponseUtils.ok(student);
+            return testService.getUser(uuid);
         } catch (Exception e) {
             log.warn("查询异常", e.getMessage());
             return ResponseUtils.warn(SystemMessageEnums.SYSTEM_ERROR);
         }
-
     }
 
 }

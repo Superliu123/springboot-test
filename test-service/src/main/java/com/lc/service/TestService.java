@@ -1,9 +1,9 @@
 package com.lc.service;
 
-import com.lc.domain.User;
+import com.lc.utils.ResponseUtils;
 
 
 public interface TestService {
 
-    User getUser(String uuid);
+    ResponseUtils getUser(String uuid);
 }
