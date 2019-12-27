@@ -19,6 +19,7 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
     public User getUser(String uuid){
         log.info("测试test入参uuid[{}]", uuid);
         return userMapper.findById(uuid);

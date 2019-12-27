@@ -23,7 +23,7 @@ public class TestSpringBootApplication {
     public static void main(String[] args) {
         try {
             SpringApplication app = new SpringApplication(TestSpringBootApplication.class);
-            //app.setBannerMode(Banner.Mode.OFF);
+            app.setBannerMode(Banner.Mode.OFF);
             ApplicationContext context = app.run(args);
             String[] activeProfiles = context.getEnvironment().getActiveProfiles();
             log.info(print());
@@ -46,6 +46,9 @@ public class TestSpringBootApplication {
         sb.append("   │       ─┴─       │\n");
         sb.append("   │                 │\n");
         sb.append("   └───┐         ┌───┘\n");
+        sb.append("       │         │\n");
+        sb.append("       │         │\n");
+        sb.append("       │         │\n");
         sb.append("       │         │\n");
         sb.append("       │         │\n");
         sb.append("       │         │\n");

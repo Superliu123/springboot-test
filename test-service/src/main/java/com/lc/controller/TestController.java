@@ -3,6 +3,9 @@ package com.lc.controller;
 import com.lc.domain.User;
 import com.lc.service.TestService;
 import com.lc.utils.ResponseUtils;
+import com.lc.enums.SystemMessageEnums;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("test")
 @Slf4j
+@Api(value = "测试接口")
 public class TestController {
+
     @Autowired
     private TestService testService;
+
     @GetMapping("hello")
+    @ApiOperation(value = "测试hello", notes = "测试hello")
     public ResponseUtils helloworld(){
         try {
             User student = testService.getUser("1");
             log.info("test出参student[{}]",student);
-            return ResponseUtils.ok(student, "查询成功");
+            return ResponseUtils.ok(student);
         } catch (Exception e) {
-            return ResponseUtils.warn("服务异常，请稍后再试");
+            log.warn("查询异常", e.getMessage());
+            return ResponseUtils.warn(SystemMessageEnums.SYSTEM_ERROR);
         }
 
     }

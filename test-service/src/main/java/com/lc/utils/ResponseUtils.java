@@ -1,5 +1,6 @@
 package com.lc.utils;
 
+import com.lc.enums.SystemMessageEnums;
 import lombok.Data;
 
 /**
@@ -10,9 +11,6 @@ import lombok.Data;
 @Data
 public class ResponseUtils<T> {
 
-    private static final String SUCCESS = "200";
-
-    private static final String FAIL = "500";
 
     private String code;
 
@@ -20,17 +18,25 @@ public class ResponseUtils<T> {
 
     private T data;
 
-    public ResponseUtils(String code, String msg, T data){
+    private ResponseUtils(String code, String msg, T data){
         this.code = code;
         this.msg = msg;
         this.data = data;
     }
 
-    public static<T> ResponseUtils ok(T data, String msg){
-        return new ResponseUtils<>(SUCCESS, msg, data);
+    public static ResponseUtils ok(SystemMessageEnums systemMessageEnums) {
+        return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), systemMessageEnums.getMsg(), null);
     }
 
-    public static ResponseUtils warn(String msg){
-        return new ResponseUtils<>(FAIL,msg, null);
+    public static<T> ResponseUtils ok (T data) {
+        return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), "", data);
+    }
+
+    public static<T> ResponseUtils ok(T data, SystemMessageEnums systemMessageEnums){
+        return new ResponseUtils<>(SystemMessageEnums.SUCCESS.getCode(), systemMessageEnums.getMsg(), data);
+    }
+
+    public static ResponseUtils warn(SystemMessageEnums systemMessageEnums){
+        return new ResponseUtils<>(SystemMessageEnums.FAIL.getCode(), systemMessageEnums.getMsg(), null);
     }
 }
