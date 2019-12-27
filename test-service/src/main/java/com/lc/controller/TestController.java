@@ -29,9 +29,9 @@ public class TestController {
 
     @GetMapping("hello")
     @ApiOperation(value = "测试hello", notes = "测试hello")
-    public ResponseUtils helloworld(){
+    public ResponseUtils helloWorld(String uuid){
         try {
-            User student = testService.getUser("1");
+            User student = testService.getUser(uuid);
             log.info("test出参student[{}]",student);
             return ResponseUtils.ok(student);
         } catch (Exception e) {
